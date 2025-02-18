@@ -1,9 +1,9 @@
 import React from 'react'
 import style from './xbutton.module.css'
 
-const Xbutton = ({ children, onClick, variant = "primary" }) => {
+const Xbutton = ({ children, onClick, variant = "primary" , active="" }) => {
     return (
-        <button className={style[variant]} onClick={onClick}>
+        <button className={`${style[variant]} ${style[active]}`} onClick={onClick}>
             {children}
         </button>
     )
