@@ -1,0 +1,39 @@
+.primary {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: fit-content; 
+  }
+
+  
+
+  @keyframes pulse {
+    0%{
+      scale: 1.0;
+    } 
+    100%{
+      scale:.9;
+    }   
+  }
+  
+  .secondary {
+    background-color: gray;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .primary:hover {
+    background-color: darkblue;
+    animation: pulse .5s ease-in-out 0s infinite alternate;
+  }
+  
+  .secondary:hover {
+    background-color: darkgray;
+  }
+  
