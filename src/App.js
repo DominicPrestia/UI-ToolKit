@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Xbutton from "./componenets/Button/Xbutton";
+import Calendar from "./componenets/Calendar/Calendar";
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
   return (
     <div className="App">
 
-      <div className="TopBoundingBox">
+      <div className="buttonsContainer">
         <div className={closed ? "notVisible" : "BotBoundingBox"} onClick={handleClosed} >
           <p>Custom 1 Button</p>
           <Xbutton variant="primary" >Custom Button</Xbutton>
@@ -21,6 +22,10 @@ function App() {
           <p>Custom 2 Button</p>
           <Xbutton variant="secondary">Custom Button</Xbutton>
         </div>
+      </div>
+
+      <div className="calendarContainer">
+        <Calendar/>
       </div>
 
     </div>
