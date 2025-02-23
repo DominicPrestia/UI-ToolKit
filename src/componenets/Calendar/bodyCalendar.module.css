@@ -1,0 +1,19 @@
+.topContainer{
+    justify-content: space-evenly;
+    display: flex;
+    background-color: blue;
+}
+
+.column{
+    width: 100%;
+    background-color: bisque;
+    border:1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row{
+    text-align: center;
+}

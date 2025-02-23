@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <div className={style.topContainer}>
             <div className={style.leftHeader}>
-                <div>Month</div>
+                <div>Month</div>    
                 <div>Year</div>
             </div>
             <div className={style.rightHeader}>
