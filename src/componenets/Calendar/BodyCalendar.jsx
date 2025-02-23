@@ -3,7 +3,7 @@ import style from './bodyCalendar.module.css'
 
 const BodyCalendar = () => {
 
-    const days = Array.from({ length: 6 }, (value, i) => Array.from({ length: 7 }, (_, i2) => i2 + 1))
+    const days = Array.from({ length: 7 }, (value, i) => Array.from({ length: 6 }, (_, i2) => i2 + 1))
 
     console.log("days array: ", days)
 
