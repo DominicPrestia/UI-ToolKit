@@ -6,15 +6,18 @@ import SubHeader from './SubHeader'
 
 const Calendar = ({value, onChange}) => {
 
-  const [month, setMonth] = useState();
-  const [year, setYear] = useState();
+  const [month, setMonth] = useState(new Date().getMonth());
+  const [year, setYear] = useState(new Date().getFullYear());
 
+
+  console.log("MONTH: ", month);
+  console.log("YEAR: ", year);
 
   return (
     <div className={style.topContainer}>
-        <Header/>
+        <Header setMonth={setMonth} setYear={setYear}/>
         <SubHeader/>
-        <BodyCalendar/>
+        <BodyCalendar month={month} year={year}/>
     </div>
   )
 }
