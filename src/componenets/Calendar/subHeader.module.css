@@ -2,12 +2,20 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    border-top:1px solid black;
     border-bottom: 1px solid black;
 
 }
 
 .title{
     width: 100%;
-    border: 1px solid black;
+    border-left:1px solid black;
+    border-bottom:none;
+    border-top:none;
+    border-right:none;
     text-align: center;
+}
+
+.title:first-child{
+    border:none;
 }

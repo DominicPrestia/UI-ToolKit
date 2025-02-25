@@ -8,7 +8,7 @@ const SubHeader = () => {
     return (
         <div className={style.topContainer}>
             {subHeaderValues.map((value, index) => {return (
-                <div className={style.title}>{value}</div>
+                <div key={index} className={style.title}>{value}</div>
             )})}
         </div>
     )
