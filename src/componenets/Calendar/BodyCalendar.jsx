@@ -8,13 +8,7 @@ const BodyCalendar = ({ month, year }) => {
     const lastDay = new Date(year, month + 1, 0);
     let position = 0;
 
-    console.log("First Day: ", firstDay.getDate())
-    console.log("First Day: ", firstDay.getDay())
-    console.log("Total Days: ", lastDay.getDate())
-    console.log("Date: ", firstDay)
-    console.log("Last Date: ", lastDay)
-
-    const handleFirstDay = (startDay, doyOfWeek, row, endDay) => {
+    const outputDays = (startDay, doyOfWeek, row, endDay) => {
         const firstDay = startDay;
         const lastDay = endDay;
         const i = doyOfWeek;
@@ -22,26 +16,30 @@ const BodyCalendar = ({ month, year }) => {
 
         let content;
 
-        console.log("TEST: ", firstDay.getMonth())
-
         if (firstDay.getDay() === i && firstDay.getMonth() <= lastDay.getMonth()) {
             content = <div key={i} className={style.row}>
-                {console.log("HIT")}
                 {firstDay.getDate()}
             </div>
             firstDay.setDate(firstDay.getDate() + 1);
-        } 
-        // else if (firstDay.getDate() === lastDay.getDate()){
-        //     content = <div key={i} className={style.row}>
-        //        {firstDay.getDate()}
-        //     </div>     
-        // }
-        else {
-            content = <div className={style.row}> NO </div>
         }
+        else if (firstDay.getDay() !== i && firstDay.getMonth() <= lastDay.getMonth()) {
 
+            const minusDays = firstDay.getDay() - i;
 
+            const prevMonthDay = new Date(firstDay)
 
+            prevMonthDay.setDate(firstDay.getDate() - minusDays);
+
+            content = <div key={i} className={style.row}>
+                {prevMonthDay.getDate()}
+            </div>
+        }
+        else {
+            content = <div className={style.row}>
+                {firstDay.getDate()}
+            </div>
+            firstDay.setDate(firstDay.getDate() + 1)
+        }
 
         return content;
     }
@@ -56,7 +54,8 @@ const BodyCalendar = ({ month, year }) => {
                             position++;
                             return (
                                 <>
-                                    {handleFirstDay(firstDay, i, index, lastDay)}</>
+                                    {outputDays(firstDay, i, index, lastDay)}
+                                </>
                             )
                         })}
                     </div>)
