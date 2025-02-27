@@ -6,7 +6,7 @@
 
 .column{
     flex: 1;
-    background-color: red;
+    background-color: gainsboro;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -27,7 +27,6 @@
     border-top:none;
     border-right:none;
     border-bottom:none;
-    background-color: antiquewhite;
     display: flex;
     justify-content: center;
     align-items: center;

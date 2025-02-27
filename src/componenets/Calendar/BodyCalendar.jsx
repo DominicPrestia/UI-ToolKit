@@ -7,6 +7,7 @@ const BodyCalendar = ({ month, year }) => {
     const calendarDimensions = Array.from({ length: 6 }, (value, i) => Array.from({ length: 7 }, (_, i2) => i2 + 1))
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
+    const pickRange = 7;
 
     const calculateDay = (startDay, doyOfWeek, endDay) => {
         const firstDay = startDay;
@@ -35,17 +36,22 @@ const BodyCalendar = ({ month, year }) => {
         return content;
     }
 
+    const handleMouseOver = (y,x) => {
+        console.log("Mouse Over",y, ", ", x)
+    }
+
     console.log("RENDER")
 
     return (
         <div className={style.topContainer}>
-            {calendarDimensions.map((dayOfWeek, index) => {
+            {calendarDimensions.map((dayOfWeek, y) => {
                 return (
-                    <div key={index} className={style.column}>
-                        {dayOfWeek.map((day, i) => {
+                    <div key={y} className={style.column}>
+                        {dayOfWeek.map((day, x) => {
+                            
                             return (
-                                <div key={i} className={style.row}>
-                                    <Day day={calculateDay(firstDay,i,lastDay)}/>
+                                <div onMouseOver={()=>handleMouseOver(y, x)}  key={x} className={style.row}>
+                                    <Day day={calculateDay(firstDay,x,lastDay)}/>
                                 </div>
                             )
                         })}
