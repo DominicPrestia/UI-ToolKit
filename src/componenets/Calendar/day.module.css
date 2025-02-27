@@ -1,0 +1,15 @@
+.topContainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform .2s ease-in-out;
+    width:50%;
+    height: 50%;
+}
+
+.topContainer:hover{
+    transform: scale(1.5);
+    cursor: pointer;
+    background-color: gray;
+    border-radius: 100%;
+}
