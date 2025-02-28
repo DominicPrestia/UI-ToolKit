@@ -4,10 +4,11 @@ import Header from './Header'
 import BodyCalendar from './BodyCalendar'
 import SubHeader from './SubHeader'
 
-const Calendar = ({value, onChange}) => {
+const Calendar = ({onDateSelect}) => {
 
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
+
 
 
   console.log("MONTH: ", month);
