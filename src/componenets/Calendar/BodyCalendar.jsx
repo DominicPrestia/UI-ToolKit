@@ -1,10 +1,13 @@
 import React, { useEffect, useState, } from 'react'
 import style from './bodyCalendar.module.css'
 import Day from './Day';
+import { setSelectionRange } from '@testing-library/user-event/dist/utils';
 
 const BodyCalendar = ({ month, year }) => {
 
     const [calendarData, setCalendarData] = useState([])
+    const [isSelected, setIsSelected] = useState(false);
+    const [dateSelection, setDateSelection] = useState({})
     const pickRange = 6;
 
     const handleMouseOver = (data) => {
@@ -13,13 +16,20 @@ const BodyCalendar = ({ month, year }) => {
             return prevData.map((dayOfweek) => {
                 return dayOfweek.map((day) => {
                     let startPos = data.id
-                    let endPos = data.id+pickRange
-                        if (day.id >= startPos && day.id <= endPos) {
-                            return { ...day, isHovered: true };
+                    let endPos = data.id + pickRange
+                    if (day.id >= startPos && day.id <= endPos) {
+                        if (startPos === day.id) {
+                            return { ...day, isHovered: true, firstPos: true };
+                        } else if (endPos === day.id) {
+                            return { ...day, isHovered: true, endPos: true };
                         } else {
-                            return day;
+                            return { ...day, isHovered: true };
                         }
-                    }  
+
+                    } else {
+                        return day;
+                    }
+                }
                 )
             })
         })
@@ -31,13 +41,43 @@ const BodyCalendar = ({ month, year }) => {
             return prevData.map((dayOfweek) => {
                 return dayOfweek.map((day) => {
                     let startPos = data.id
-                    let endPos = data.id+pickRange
+                    let endPos = data.id + pickRange
                     if (day.id >= startPos && day.id <= endPos) {
-                        return { ...day, isHovered: false };
+                        if (startPos === day.id) {
+                            return { ...day, isHovered: false, firstPos: false };
+                        } else if (endPos === day.id) {
+                            return { ...day, isHovered: false, endPos: false };
+                        } else {
+                            return { ...day, isHovered: false };
+                        }
                     } else {
                         return day;
                     }
                 })
+            })
+        })
+    }
+
+    const handleOnClick = (data) => {
+
+        console.log(data);
+        console.log(calendarData);
+
+        calendarData.map((week) => {
+            return week.map((day) => {
+                let startPos = data.id
+                let endPos = data.id + pickRange
+                if(day.id === startPos){
+                    console.log("In Start Pos")
+                    setDateSelection((prevValue) => {
+                    return {...prevValue, startDate: day.day}
+                    })
+                }else if(day.id === endPos){
+                    console.log("END POS ID: ", day.day)
+                    setDateSelection((prevValue) => {
+                        return {...prevValue, endDate: day.day}
+                        })
+                }
             })
         })
     }
@@ -59,6 +99,7 @@ const BodyCalendar = ({ month, year }) => {
                     id: position,
                     day: firstDay.getDate(),
                     isHovered: false,
+
                 }
 
                 firstDay.setDate(firstDay.getDate() + 1);
@@ -73,6 +114,7 @@ const BodyCalendar = ({ month, year }) => {
                     id: position,
                     day: prevMonthDay.getDate(),
                     isHovered: false,
+
                 }
             }
             else {
@@ -80,6 +122,7 @@ const BodyCalendar = ({ month, year }) => {
                     id: position,
                     day: firstDay.getDate(),
                     isHovered: false,
+
                 }
                 firstDay.setDate(firstDay.getDate() + 1)
             }
@@ -93,10 +136,18 @@ const BodyCalendar = ({ month, year }) => {
             })
         );
 
+        const newDateSelection = {
+            startDate: 0,
+            endDate:0,
+        }
+
+
+        setDateSelection(newDateSelection)
         setCalendarData(newCalendarData)
 
     }, [month, year])
 
+    console.log(dateSelection)
 
     return (
         <div className={style.topContainer}>
@@ -105,8 +156,15 @@ const BodyCalendar = ({ month, year }) => {
                     <div key={y} className={style.column}>
                         {row.map((col, x) => {
                             return (
-                                <div key={x} onMouseOver={() => handleMouseOver(col)} onMouseOut={()=> handleMouseOut(col)} className={`${style.row} ${col.isHovered ? style.active: ""}`}>
-                                    <Day day={col.day} isHovered={col.isHovered} />
+                                <div key={x}
+                                    onMouseOver={() => handleMouseOver(col)} onMouseOut={() => handleMouseOut(col)}
+                                    onClick={() => handleOnClick(col)}
+                                    className={`${style.row}`}>
+
+                                    <Day
+                                        col={col}
+                                    />
+
                                 </div>
                             )
                         })}

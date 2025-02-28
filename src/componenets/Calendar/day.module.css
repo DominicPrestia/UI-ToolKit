@@ -2,7 +2,27 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    transition: transform .2s ease-in-out;
-    width:50%;
-    height: 50%;
+    font-size:1em;
+    transition: font-size .2s ease-in-out;
+    width:100%;
+    height: 67%;
+}
+
+.topContainer.active{
+    border:1px solid black;
+    border-left:none;
+    border-right:none;
+}
+
+
+.first{
+    border:1px solid black;
+    border-right:1px solid transparent;
+    border-radius: 10px 0 0 10px;
+}
+
+.last{
+    border:1px solid black;
+    border-left:none;
+    border-radius: 0px 10px 10px 0px;
 }
